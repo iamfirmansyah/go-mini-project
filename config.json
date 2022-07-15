@@ -1,0 +1,11 @@
+{
+    "MYSQL_CONNECTION": "root:@tcp(127.0.0.1)/go_api_mysql",
+    "MYSQL_CONNECTION_SERVER13": "api:password@tcp(157.245.53.222)/yesdok",
+    "PORT": 8001,
+    "MONGO_DB_HOST": "45.76.150.111",
+    "MONGO_DB_PORT": "23746",
+    "MONGO_DB_DATABASE": "yesdok",
+    "MONGO_DB_USERNAME": "yesdok_root",
+    "MONGO_DB_PASSWORD": "2An2k6DWsK7Ax4hDaKzUMdbCMutXvEUAJwQHax",
+    "MONGO_DB_AUTHENTICATION_DATABASE": "admin"
+}
