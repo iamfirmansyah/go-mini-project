@@ -1,12 +1,13 @@
 package controllers
 
 import (
-	"encoding/json"
 	"go-pos/app"
 	"go-pos/entity"
 	"go-pos/entity/model"
 	"go-pos/helper"
 	"net/http"
+
+	"github.com/go-playground/validator/v10"
 )
 
 func GetAll(w http.ResponseWriter, r *http.Request) {
@@ -47,8 +48,26 @@ func GetByID(w http.ResponseWriter, r *http.Request) {
 }
 
 func Create(w http.ResponseWriter, r *http.Request) {
+	validate := validator.New()
+
 	var product model.Product
-	json.NewDecoder(r.Body).Decode(&product)
+
+	helper.ReadFromRequestBody(r, &product)
+
+	// ToDo: make validator
+	err := validate.Struct(product)
+
+	errors := helper.FormatValidationError(err)
+
+	if errors != nil {
+		response := entity.WebResponse{
+			Code:   401,
+			Status: "ERROR_VALIDATION",
+			Data:   errors,
+		}
+		helper.Response(w, response)
+		return
+	}
 
 	app.Instance.Create(&product)
 
@@ -76,7 +95,10 @@ func Update(w http.ResponseWriter, r *http.Request) {
 		return
 	}
 
-	json.NewDecoder(r.Body).Decode(&data)
+	helper.ReadFromRequestBody(r, &data)
+
+	// ToDo: make validator
+
 	app.Instance.Save(&data)
 
 	response := entity.WebResponse{
