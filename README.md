@@ -1,4 +1,4 @@
-# go-mini-project ![alt text][build_status]
+# go-mini-project
 
 an example rest api in golang and mysql
 
