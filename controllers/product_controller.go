@@ -16,11 +16,9 @@ func GetAll(w http.ResponseWriter, r *http.Request) {
 	app.Instance.Model(&model.Product{}).Scan(&data)
 
 	response := entity.WebResponse{
-		Code:   200,
-		Status: "success",
-		Data:   data,
+		Data: data,
 	}
-	helper.Response(w, response)
+	helper.Response(w, response, 200)
 }
 
 func GetByID(w http.ResponseWriter, r *http.Request) {
@@ -32,19 +30,16 @@ func GetByID(w http.ResponseWriter, r *http.Request) {
 
 	if data.Name == "" {
 		response := entity.WebResponse{
-			Code:   204,
-			Status: "NOT_FOUND",
+			Data: nil,
 		}
-		helper.Response(w, response)
+		helper.Response(w, response, 204)
 		return
 	}
 
 	response := entity.WebResponse{
-		Code:   200,
-		Status: "success",
-		Data:   data,
+		Data: data,
 	}
-	helper.Response(w, response)
+	helper.Response(w, response, 200)
 }
 
 func Create(w http.ResponseWriter, r *http.Request) {
@@ -61,22 +56,18 @@ func Create(w http.ResponseWriter, r *http.Request) {
 
 	if errors != nil {
 		response := entity.WebResponse{
-			Code:   401,
-			Status: "ERROR_VALIDATION",
-			Data:   errors,
+			Data: errors,
 		}
-		helper.Response(w, response)
+		helper.Response(w, response, 400)
 		return
 	}
 
 	app.Instance.Create(&product)
 
 	response := entity.WebResponse{
-		Code:   200,
-		Status: "success",
-		Data:   product,
+		Data: product,
 	}
-	helper.Response(w, response)
+	helper.Response(w, response, 200)
 }
 
 func Update(w http.ResponseWriter, r *http.Request) {
@@ -88,10 +79,9 @@ func Update(w http.ResponseWriter, r *http.Request) {
 
 	if data.Name == "" {
 		response := entity.WebResponse{
-			Code:   204,
-			Status: "NOT_FOUND",
+			Data: nil,
 		}
-		helper.Response(w, response)
+		helper.Response(w, response, 204)
 		return
 	}
 
@@ -102,12 +92,10 @@ func Update(w http.ResponseWriter, r *http.Request) {
 	app.Instance.Save(&data)
 
 	response := entity.WebResponse{
-		Code:   200,
-		Status: "success",
-		Data:   data,
+		Data: data,
 	}
 
-	helper.Response(w, response)
+	helper.Response(w, response, 200)
 }
 
 func Delete(w http.ResponseWriter, r *http.Request) {
@@ -119,10 +107,5 @@ func Delete(w http.ResponseWriter, r *http.Request) {
 
 	app.Instance.Delete(&data)
 
-	response := entity.WebResponse{
-		Code:   204,
-		Status: "success",
-	}
-
-	helper.Response(w, response)
+	helper.Response(w, nil, 204)
 }
