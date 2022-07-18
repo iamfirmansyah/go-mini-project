@@ -1,7 +1,6 @@
 package controllers
 
 import (
-	"fmt"
 	"go-pos/app"
 	"go-pos/entity"
 	"go-pos/entity/model"
@@ -26,9 +25,6 @@ func GetByID(w http.ResponseWriter, r *http.Request) {
 	var data model.Product
 
 	id := r.URL.Query()["id"]
-
-	fmt.Println(id)
-	fmt.Println("eweuh")
 
 	app.Instance.First(&data, id)
 
