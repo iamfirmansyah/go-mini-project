@@ -31,4 +31,5 @@ func LoadAppConfig() {
 
 	err = viper.Unmarshal(&AppConfig)
 	helper.PanicIfError(err)
+	log.Println("Configuration Success...")
 }

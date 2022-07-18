@@ -6,5 +6,5 @@ type Product struct {
 	Price     int
 	Stock     int
 	CreatedAt int
-	UpdatedAt int
+	UpdatedAt *int
 }
