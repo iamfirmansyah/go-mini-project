@@ -1,6 +1,7 @@
 package controllers
 
 import (
+	"fmt"
 	"go-pos/app"
 	"go-pos/entity"
 	"go-pos/entity/model"
@@ -25,6 +26,9 @@ func GetByID(w http.ResponseWriter, r *http.Request) {
 	var data model.Product
 
 	id := r.URL.Query()["id"]
+
+	fmt.Println(id)
+	fmt.Println("eweuh")
 
 	app.Instance.First(&data, id)
 
@@ -77,11 +81,8 @@ func Update(w http.ResponseWriter, r *http.Request) {
 
 	app.Instance.First(&data, id)
 
-	if data.Name == "" {
-		response := entity.WebResponse{
-			Data: nil,
-		}
-		helper.Response(w, response, 204)
+	if data.Name == "" || id == nil {
+		helper.Response(w, nil, 204)
 		return
 	}
 

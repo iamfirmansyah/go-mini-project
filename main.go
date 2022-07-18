@@ -23,7 +23,7 @@ func main() {
 	s := router.PathPrefix("/api").Subrouter()
 
 	// * Register Routes Public
-	routes.Public(s.PathPrefix("/public").Subrouter())
+	routes.Product(s.PathPrefix("/product").Subrouter())
 
 	// * Start the server
 	log.Println(fmt.Sprintf("Starting Server on port %s", config.AppConfig.PORT))
