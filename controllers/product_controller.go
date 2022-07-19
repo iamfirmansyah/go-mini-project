@@ -11,13 +11,13 @@ import (
 )
 
 func GetAll(w http.ResponseWriter, r *http.Request) {
-
 	var data []model.Product
 	app.Instance.Model(&model.Product{}).Scan(&data)
 
 	response := entity.WebResponse{
 		Data: data,
 	}
+
 	helper.Response(w, response, 200)
 }
 
