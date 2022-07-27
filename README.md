@@ -1,6 +1,6 @@
 # go-mini-project
 
-an example rest api in golang and mysql
+Implementing Golang RESTful API with Mux & GORM
 
 ## prerequisites
 
